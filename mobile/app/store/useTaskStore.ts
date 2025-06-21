@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { mmkv, STORAGE_KEY } from './storage/mmkv';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ITask } from '@interfaces/ITask';
 
 interface ITaskState {
@@ -15,22 +15,22 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
   addTask: (task) => {
     const updatedTasks = [task, ...get().tasks];
     set({ tasks: updatedTasks });
-    mmkv.set(STORAGE_KEY, JSON.stringify(updatedTasks));
+    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   },
   updateTask: (updatedTask) => {
     const updatedTasks = get().tasks.map((task) =>
       task.id === updatedTask.id ? updatedTask : task,
     );
     set({ tasks: updatedTasks });
-    mmkv.set(STORAGE_KEY, JSON.stringify(updatedTasks));
+    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   },
   deleteTask: (id) => {
     const updatedTasks = get().tasks.filter((task) => task.id !== id);
     set({ tasks: updatedTasks });
-    mmkv.set(STORAGE_KEY, JSON.stringify(updatedTasks));
+    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   },
   loadTasks: async () => {
-    const storedTasks = mmkv.getString(STORAGE_KEY);
+    const storedTasks = await AsyncStorage.getItem('tasks');
     if (storedTasks) {
       set({ tasks: JSON.parse(storedTasks) });
     }

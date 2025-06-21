@@ -12,6 +12,7 @@ module.exports = {
           '@hooks': './app/hooks',
           '@utils': './app/utils',
           '@interfaces': './app/interfaces',
+          '@shared': './app/shared',
         },
       },
     ],

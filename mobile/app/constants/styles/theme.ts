@@ -1,0 +1,63 @@
+export const theme = {
+  colors: {
+    PRIMARY: '#1ABC9C',
+    PRIMARY_DARK: '#16A085',
+    BACKGROUND: '#F7FAFA',
+    CARD: '#FFFFFF',
+    BORDER: '#D0EAE2',
+    TEXT: '#222F2E',
+    TEXT_SECONDARY: '#5D7573',
+    ACCENT: '#14B19D',
+    ACCENT_SOFT: '#D6F5EF',
+    DANGER: '#E3776B',
+    DANGER_BG: '#FAE3E0',
+    PROGRESS_TEXT: '#CFB71B',
+    BUTTON_TEXT: '#FFFFFF',
+    MODAL_BACKGROUND: '#0000004D',
+    SHADOW: '#000',
+    MUTED: '#B3C2BE',
+  },
+  fontSizes: {
+    SMALL: 14,
+    NORMAL: 15,
+    MEDIUM: 16,
+    LARGE: 18,
+    EXTRA_LARGE: 20,
+  },
+  padding: {
+    SMALL: 8,
+    NORMAL: 10,
+    MEDIUM: 12,
+    LARGE: 15,
+    EXTRA_LARGE: 20,
+  },
+  borderRadius: {
+    SMALL: 6,
+    NORMAL: 8,
+    LARGE: 10,
+  },
+  margin: {
+    SMALL: -10,
+    REGULAR: 3,
+    MEDIUM: 5,
+    EXTRA_MEDIUM: 8,
+    LARGE: 10,
+    EXTRA_LARGE: 15,
+    BIG: 20,
+  },
+  borderWidth: {
+    THIN: 1,
+    NORMAL: 1.5,
+  },
+  height: {
+    SMALL: 40,
+    NORMAL: 80,
+  },
+  width: {
+    NORMAL: 80,
+  },
+  shadowRadius: {
+    SMALL: 2,
+    NORMAL: 3,
+  },
+};

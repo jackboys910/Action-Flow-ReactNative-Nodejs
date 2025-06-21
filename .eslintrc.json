@@ -26,7 +26,8 @@
         "trailingComma": "all",
         "bracketSpacing": true,
         "printWidth": 100,
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "semi": true
       }
     ],
     "@typescript-eslint/no-empty-function": "off",

@@ -1,7 +1,7 @@
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const App: React.FC = () => {
-  return <SafeAreaView style={{ flex: 1 }}></SafeAreaView>
-}
+  return <SafeAreaView style={{ flex: 1 }}></SafeAreaView>;
+};
 
-export default App
+export default App;

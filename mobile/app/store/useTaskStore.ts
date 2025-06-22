@@ -1,38 +1,35 @@
 import { create } from 'zustand';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as taskApi from '@api/task.service';
 import { ITask } from '@interfaces/ITask';
 
 interface ITaskState {
   tasks: ITask[];
-  addTask: (task: ITask) => void;
-  updateTask: (updateTask: ITask) => void;
-  deleteTask: (id: string) => void;
   loadTasks: () => Promise<void>;
+  addTask: (draft: Omit<ITask, 'id'>) => Promise<void>;
+  updateTask: (task: ITask) => Promise<void>;
+  deleteTask: (id: string) => Promise<void>;
 }
 
 export const useTaskStore = create<ITaskState>((set, get) => ({
   tasks: [],
-  addTask: (task) => {
-    const updatedTasks = [task, ...get().tasks];
-    set({ tasks: updatedTasks });
-    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
-  },
-  updateTask: (updatedTask) => {
-    const updatedTasks = get().tasks.map((task) =>
-      task.id === updatedTask.id ? updatedTask : task,
-    );
-    set({ tasks: updatedTasks });
-    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
-  },
-  deleteTask: (id) => {
-    const updatedTasks = get().tasks.filter((task) => task.id !== id);
-    set({ tasks: updatedTasks });
-    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
-  },
+
   loadTasks: async () => {
-    const storedTasks = await AsyncStorage.getItem('tasks');
-    if (storedTasks) {
-      set({ tasks: JSON.parse(storedTasks) });
-    }
+    const apiTasks = await taskApi.fetchTasks();
+    set({ tasks: apiTasks });
+  },
+
+  addTask: async (draft) => {
+    const created = await taskApi.createTask(draft);
+    set({ tasks: [created, ...get().tasks] });
+  },
+
+  updateTask: async (task) => {
+    const updated = await taskApi.updateTask(task.id, task);
+    set({ tasks: get().tasks.map((t) => (t.id === updated.id ? updated : t)) });
+  },
+
+  deleteTask: async (id) => {
+    await taskApi.deleteTask(id);
+    set({ tasks: get().tasks.filter((t) => t.id !== id) });
   },
 }));

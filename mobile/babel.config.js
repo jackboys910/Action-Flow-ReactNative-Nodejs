@@ -13,7 +13,17 @@ module.exports = {
           '@utils': './app/utils',
           '@interfaces': './app/interfaces',
           '@shared': './app/shared',
+          '@api': './api',
         },
+      },
+    ],
+    [
+      'module:react-native-dotenv',
+      {
+        moduleName: '@env',
+        path: '.env',
+        safe: false,
+        allowUndefined: false,
       },
     ],
     'react-native-reanimated/plugin',
